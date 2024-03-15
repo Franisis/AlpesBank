@@ -21,4 +21,7 @@ def userPost(request):
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('userPost'))
-
+    else: 
+        form = UserForm()
+    context = {'form': form}
+    return HttpResponse(context)
