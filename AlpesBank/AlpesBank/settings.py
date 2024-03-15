@@ -76,8 +76,12 @@ WSGI_APPLICATION = 'AlpesBank.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': str(BASE_DIR / 'db.sqlite3'),
+        'USER':'sin_miedo_al_exito',
+        'PASSWORD':'SinMiedoAlExito',
+        'HOST':'10.24.240.3',
+        'PORT':''
     }
 }
 
