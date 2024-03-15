@@ -20,5 +20,5 @@ def userPost(request):
         form = UserForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('userCreate'))
+            return HttpResponseRedirect(reverse('userPost'))
 
