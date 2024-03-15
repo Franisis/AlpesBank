@@ -1,6 +1,6 @@
 from ..models import User
 
 def get_users():
-    users = User.objects.get.all()
+    users = User.objects.all()
     return users
 
