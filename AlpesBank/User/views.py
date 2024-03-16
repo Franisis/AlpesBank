@@ -19,9 +19,7 @@ def userGet(request):
 def userPost(request):
     if request.method=="POST":
         form = UserForm(request.POST)
-        print(form)
-        if form.is_valid():
-            ul.create_user(form)
-            messages.add_message(request, messages.SUCCESS, 'Successfully created User')
-            return HttpResponseRedirect(reverse('userPost'))
-    
+        ul.create_user(form)
+        messages.add_message(request, messages.SUCCESS, 'Successfully created User')
+        return HttpResponseRedirect(reverse('userPost'))
+
