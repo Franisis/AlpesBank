@@ -4,3 +4,8 @@ def get_users():
     users = User.objects.all()
     return users
 
+def create_user(form):
+    user = form.save()
+    user.save()
+    return ()
+
