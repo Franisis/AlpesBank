@@ -47,7 +47,7 @@ def user_detail(request, pk):
     }
 
     # Devuelve los datos del usuario como una respuesta JSON
-    return JsonResponse(user_data)
+    return render(request, 'user_detail.html', {'user': user})
         
     
 
