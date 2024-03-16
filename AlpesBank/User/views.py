@@ -21,4 +21,4 @@ def userPost(request):
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('userPost'))
-    HttpResponse("Could not post")
+    return HttpResponse("Could not post")
