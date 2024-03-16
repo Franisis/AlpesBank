@@ -9,3 +9,7 @@ def create_user(form):
     user.save()
     return ()
 
+def get_by_id(user_pk):
+    user = User.objects.get(identification=user_pk)
+    return user
+
