@@ -10,6 +10,6 @@ def create_user(form):
     return ()
 
 def get_by_id(user_pk):
-    user = User.objects.get(identification=user_pk)
+    user = User.objects.get(pk=user_pk)
     return user
 
