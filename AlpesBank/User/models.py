@@ -7,6 +7,8 @@ class User(models.Model):
     lastName = models.CharField(max_length=30)
     cedula = models.CharField(max_length=30)
     correo = models.CharField(max_length=40)
-    telefono= models.CharField(max_length=10)    
+    telefono= models.CharField(max_length=10)
+    document = models.CharField(max_length=60)    
+    
 
     

@@ -21,7 +21,7 @@ def userPost(request):
         form = UserForm(request.POST)
         print(form)
         if form.is_valid():
-            form.save()
+            ul.create_user(form)
             messages.add_message(request, messages.SUCCESS, 'Successfully created User')
             return HttpResponseRedirect(reverse('userPost'))
-    return HttpResponse("Could not post")
+    
