@@ -23,4 +23,11 @@ def userPost(request):
             ul.create_user(form)
             messages.add_message(request, messages.SUCCESS, 'Successfully created User')
             return HttpResponseRedirect(reverse('userPost'))
+    else:
+        form = UserForm()
+
+    context = {
+        'form': form,
+    }
+    return HttpResponse(form)    
 
