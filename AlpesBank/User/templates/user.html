@@ -31,6 +31,18 @@
         .details strong {
             color: #0069d9;
         }
+        .download-btn {
+            display: block;
+            width: 100px;
+            margin: 20px auto;
+            padding: 10px;
+            text-align: center;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -44,6 +56,32 @@
             <p><strong>Teléfono:</strong> {{ user.telefono }}</p>
             <!-- Puedes incluir más campos según sea necesario -->
         </div>
+        <button class="download-btn" onclick="descargarArchivo()">Descargar</button>
     </div>
+
+    <script>
+        function descargarArchivo() {
+            // Crea un elemento <a> temporal para descargar el archivo
+            var elemento = document.createElement('a');
+            // Define el contenido del archivo como un texto JSON de los detalles del usuario
+            var contenido = JSON.stringify({ 
+                nombre: "{{ user.name }}",
+                apellido: "{{ user.lastName }}",
+                cedula: "{{ user.cedula }}",
+                correo: "{{ user.correo }}",
+                telefono: "{{ user.telefono }}"
+                // Puedes incluir más campos aquí si es necesario
+            });
+            // Establece el atributo href del elemento <a> como un Blob URL
+            elemento.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(contenido));
+            // Establece el nombre del archivo
+            elemento.setAttribute('download', 'detalles_usuario.json');
+            // Simula un clic en el elemento <a> para iniciar la descarga
+            elemento.style.display = 'none';
+            document.body.appendChild(elemento);
+            elemento.click();
+            document.body.removeChild(elemento);
+        }
+    </script>
 </body>
 </html>
