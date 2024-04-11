@@ -6,9 +6,16 @@ from django.urls import reverse
 from django.contrib import messages
 from .forms import UserForm
 
-
+import requests
+from django.shortcuts import render
+from django.http import JsonResponse
 
 # Create your views here.
+
+
+
+
+
 
 def userGet(request):
     if request.method=="GET":

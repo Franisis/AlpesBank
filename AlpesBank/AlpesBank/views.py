@@ -1,5 +1,6 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
+import requests
 
 def index(request):
     return render(request, 'index.html')
@@ -7,9 +8,25 @@ def index(request):
 def registro_usuario(request):
     if request.method == 'POST':
         nombre = request.POST.get('nombre')
-        return HttpResponse(nombre+' ¡Su usuario fue registrado exitosamente!')
+        respuesta = requests.get('http://35.188.169.4:8080/usercrm/')
+        mensaje = respuesta.json()['mensaje']
+        return JsonResponse({'mensaje': mensaje})
+
+        #return HttpResponse(nombre+' ¡Su usuario fue registrado exitosamente!')
     else:
         return render(request, 'registro_usuario.html')
+
+def formulario_cliente(request):
+    if request.method == 'POST':
+        # Procesar el formulario si es necesario
+        return render(request, 'formulario_cliente.html')
+
+    if request.method == 'GET':
+        respuesta = requests.get('http://35.188.169.4:8080/usercrm/')
+        mensaje = respuesta.json()['mensaje']
+        return JsonResponse({'mensaje': mensaje})
+
+    return JsonResponse({'mensaje': 'Método no permitido'})
 
 def healthCheck(request):
     return HttpResponse('ok')
