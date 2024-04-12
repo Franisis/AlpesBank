@@ -10,8 +10,7 @@ def registro_usuario(request):
         nombre = request.POST.get('nombre')
         respuesta = requests.get('http://35.188.169.4:8080/usercrm/')
         mensaje = respuesta.json()['mensaje']
-        if mensaje == '1':
-            return render(request, 'registro_exitoso.html')
+        return JsonResponse({'mensaje': mensaje})
     else:
         return render(request, 'registro_fallido.html')
 
