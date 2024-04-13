@@ -24,19 +24,17 @@ def userGet(request):
         return HttpResponse(users_dto, 'application/json')
 
 def userPost(request):
-    if request.method=="POST":
-        form = UserForm(request.POST)
-        if form.is_valid():
-            ul.create_user(form)
-            messages.add_message(request, messages.SUCCESS, 'Successfully created User')
-            return HttpResponseRedirect(reverse('userPost'))
-    else:
-        form = UserForm()
-
-    context = {
-        'form': form,
-    }
-    return HttpResponse(context)    
+    
+    if request.method == 'POST':
+        nombre = request.POST.get('nombre')
+        respuesta = requests.get('http://35.188.169.4:8080/usercrm/')
+        mensaje = respuesta.json()['mensaje']
+        #return JsonResponse({'mensaje': mensaje})
+        if mensaje == '1':
+            return render(request, 'registro_exitoso.html')
+        else:
+            return render(request, 'registro_fallido.html')
+      
 
 def user_detail(request, pk):
     
