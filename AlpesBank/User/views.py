@@ -22,17 +22,16 @@ def userGet(request):
 def userPost(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
-        if form.is_valid():
-            form.save()  # Guardar el usuario en la base de datos
-            
-            # Redirigir a otra página después del registro
-            respuesta = requests.get('http://35.188.169.4:8080/usercrm/')
-            mensaje = respuesta.json()['mensaje']
-            #return JsonResponse({'mensaje': mensaje})
-            if mensaje == '1':
-                return render(request, 'registro_exitoso.html')
-            else:
-                return render(request, 'registro_fallido.html')
+        form.save()  # Guardar el usuario en la base de datos
+        
+        # Redirigir a otra página después del registro
+        respuesta = requests.get('http://35.188.169.4:8080/usercrm/')
+        mensaje = respuesta.json()['mensaje']
+        #return JsonResponse({'mensaje': mensaje})
+        if mensaje == '1':
+            return render(request, 'registro_exitoso.html')
+        else:
+            return render(request, 'registro_fallido.html')
         
         # Si el formulario no es válido, renderizar la página con el formulario y los errores
         return render(request, 'registro_usuario.html', {'form': form})
