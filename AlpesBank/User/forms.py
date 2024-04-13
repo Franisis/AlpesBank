@@ -11,6 +11,6 @@ class UserForm(forms.ModelForm):
             'cedula',
             'correo',
             'telefono',
-            'contraseñas',
+            'contraseña',
             
             ]
