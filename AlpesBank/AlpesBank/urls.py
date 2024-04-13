@@ -24,6 +24,6 @@ urlpatterns = [
     path('health-check/', views.healthCheck),
     path('', views.index),
     path('', include('User.urls')),
-    #path('registro/', views.registro_usuario, name='registro_usuario')
+    path('registro/', views.registro_usuario, name='registro_usuario'),
 
 ]
