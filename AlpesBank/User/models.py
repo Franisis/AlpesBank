@@ -8,7 +8,7 @@ class User(models.Model):
     cedula = models.CharField(max_length=30)
     correo = models.CharField(max_length=40)
     telefono= models.CharField(max_length=10)
-    #document = models.CharField(max_length=60)    
+    contraseña=models.CharField(max_length=50,unique=True)
 
 
     
