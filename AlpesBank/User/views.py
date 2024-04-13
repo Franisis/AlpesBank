@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .logic import logic_user as ul
 from django.core import serializers
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
-from django.urls import reverse, redirect
+from django.urls import reverse
 from django.contrib import messages
 from .forms import UserForm
 
