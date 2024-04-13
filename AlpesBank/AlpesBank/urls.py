@@ -17,6 +17,8 @@ from django.contrib import admin
 
 from django.urls import path, include
 
+from django.views.decorators.csrf import csrf_exempt
+
 from . import views
 
 urlpatterns = [
@@ -24,6 +26,6 @@ urlpatterns = [
     path('health-check/', views.healthCheck),
     path('', views.index),
     path('', include('User.urls')),
-    path('registro/', views.registro_usuario, name='registro_usuario'),
+    path('registro/', csrf_exempt(views.registro_usuario), name='registro_usuario'),
 
 ]
