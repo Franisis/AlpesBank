@@ -22,6 +22,7 @@ def userGet(request):
 def userPost(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
+        print(request.POST)
         form.save()  # Guardar el usuario en la base de datos
         
         # Redirigir a otra página después del registro
