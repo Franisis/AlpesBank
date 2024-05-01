@@ -27,5 +27,7 @@ urlpatterns = [
     path('', views.index),
     path('', include('User.urls')),
     path('registro/', csrf_exempt(views.registro_usuario), name='registro_usuario'),
+    path(r'', include('django.contrib.auth.urls')),
+    path(r'', include('social_django.urls')),
 
 ]
