@@ -18,7 +18,7 @@ def registro_usuario(request):
         else:
             return render(request, 'registro_fallido.html')
     else:
-        return render(request, 'acceso_denegado.html')
+        return render(request, 'registro_usuario.html')
 
 def formulario_cliente(request):
     if request.method == 'POST':
