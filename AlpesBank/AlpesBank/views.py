@@ -7,22 +7,19 @@ from AlpesBank.auth0backend import getRole
 def index(request):
     return render(request, 'index.html')
 
-@login_required
 def registro_usuario(request):
-    role = getRole(request)
-    if role == "Asesor":
-        if request.method == 'POST':
-            nombre = request.POST.get('nombre')
-            respuesta = requests.get('http://35.188.169.4:8080/usercrm/')
-            mensaje = respuesta.json()['mensaje']
-            #return JsonResponse({'mensaje': mensaje})
-            if mensaje == '1':
-                return render(request, 'registro_exitoso.html')
-            else:
-                return render(request, 'registro_fallido.html')
+    if request.method == 'POST':
+        nombre = request.POST.get('nombre')
+        respuesta = requests.get('http://35.188.169.4:8080/usercrm/')
+        mensaje = respuesta.json()['mensaje']
+        #return JsonResponse({'mensaje': mensaje})
+        if mensaje == '1':
+            return render(request, 'registro_exitoso.html')
+        else:
+            return render(request, 'registro_fallido.html')
     else:
         return render(request, 'acceso_denegado.html')
-    
+
 def formulario_cliente(request):
     if request.method == 'POST':
         # Procesar el formulario si es necesario

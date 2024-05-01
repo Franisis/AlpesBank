@@ -9,6 +9,7 @@ from .forms import UserForm
 import requests
 from django.shortcuts import render
 from django.http import JsonResponse
+from AlpesBank.auth0backend import getRole
 
 # Create your views here.
 
@@ -39,25 +40,27 @@ def userPost(request):
         form = UserForm()
         return render(request, 'registro_usuario.html', {'form': form})
    
-
+@login_required
 def user_detail(request, pk):
-    
-    # Intenta obtener el usuario por su clave primaria (id)
-    user = ul.get_by_id(pk)
-    
-    # Aquí puedes hacer lo que quieras con el objeto de usuario
-    user_data = {
-        'name': user.name,
-        'lastName': user.lastName,
-        'cedula': user.cedula,
-        'correo': user.correo,
-        'telefono': user.telefono,
-        #'document': user.document
-    }
-
-    # Devuelve los datos del usuario como una respuesta JSON
-    return render(request, 'user.html', {'user': user})
+    role = getRole(request)
+    if role == "asesor":
+        # Intenta obtener el usuario por su clave primaria (id)
+        user = ul.get_by_id(pk)
         
+        # Aquí puedes hacer lo que quieras con el objeto de usuario
+        user_data = {
+            'name': user.name,
+            'lastName': user.lastName,
+            'cedula': user.cedula,
+            'correo': user.correo,
+            'telefono': user.telefono,
+            #'document': user.document
+        }
+
+        # Devuelve los datos del usuario como una respuesta JSON
+        return render(request, 'user.html', {'user': user})
+    else:
+        return render(request, 'acceso_denegado.html')
     
 
 
