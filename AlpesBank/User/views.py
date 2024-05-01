@@ -10,7 +10,7 @@ import requests
 from django.shortcuts import render
 from django.http import JsonResponse
 from AlpesBank.auth0backend import getRole
-
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
