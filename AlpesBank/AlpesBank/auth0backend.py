@@ -46,4 +46,4 @@ def getRole(request):
 
     role = userinfo['sprints-2024-1.us.auth0.com/role']
 
-    return role
+    return (role)
