@@ -10,6 +10,6 @@ def create_user(form):
     return ()
 
 def get_by_id(user_pk):
-    user = User.objects.get(pk=user_pk)
+    user = User.objects.raw("SELECT * FROM User.user WHERE id=%s" % user_pk)
     return user
 
