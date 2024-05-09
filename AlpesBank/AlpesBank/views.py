@@ -10,6 +10,10 @@ def index(request):
 
 def registro_usuario(request):
     if request.method == 'POST':
+        form = UserForm(request.POST)
+        print(form)
+        if form.is_valid():
+            form.save()
         nombre = request.POST.get('nombre')
         respuesta = requests.get('http://35.188.169.4:8080/usercrm/')
         mensaje = respuesta.json()['mensaje']

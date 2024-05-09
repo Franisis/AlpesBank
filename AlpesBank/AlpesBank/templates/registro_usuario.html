@@ -45,7 +45,7 @@
 
     <h1>Registro de Usuario - AlpesBank</h1>
 
-    <form action="/userCreate/" method="POST">
+    <form action="/registro_usuario/" method="POST">
         {% csrf_token %}
         <label for="nombre">Nombre:</label><br>
         <input type="text" id="nombre" name="nombre" required><br>
@@ -64,7 +64,7 @@
         <!--
         <label for="password">Contraseña:</label><br>
         <input type="password" id="password" name="password" required><br>
-            -->
+        -->
         <input type="submit" value="Registrar">
     </form>
 
