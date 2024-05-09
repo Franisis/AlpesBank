@@ -48,13 +48,13 @@
     <form action="{% url 'registro_usuario' %}" method="post">
         {% csrf_token %}
         <label for="nombre">Nombre:</label><br>
-        <input type="text" id="nombre" name="nombre" required><br>
+        <input type="text" id="nombre" name="name" required><br>
 
         <label for="apellido">Apellido:</label><br>
-        <input type="text" id="apellido" name="apellido" required><br>
+        <input type="text" id="apellido" name="lastName" required><br>
 
         <label for="email">Correo electrónico:</label><br>
-        <input type="email" id="email" name="email" required><br>
+        <input type="email" id="email" name="correo" required><br>
 
         <label for="telefono">Teléfono:</label><br>
         <input type="text" id="telefono" name="telefono" required><br>
