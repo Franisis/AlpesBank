@@ -1,7 +1,7 @@
 from ..models import User
 
 def get_users():
-    users = User.objects.raw("SELECT * FROM user")[0]
+    users = User.objects.all()
     return users
 
 def create_user(form):
@@ -10,6 +10,6 @@ def create_user(form):
     return ()
 
 def get_by_id(user_pk):
-    user = User.objects.get(pk=user_pk)
+    user = User.objects.raw("SELECT * FROM user WHERE id=%s"%user_pk)[0]
     return user
 
