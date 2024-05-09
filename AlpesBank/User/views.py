@@ -38,7 +38,8 @@ def userPost(request):
     else:
         # Renderizar el formulario vacío para una solicitud GET
         form = UserForm()
-        return render(request, 'registro_usuario.html', {'form': form})
+        render(request, 'registro_usuario.html', {'form': form})
+    
    
 @login_required
 def user_detail(request, pk):
