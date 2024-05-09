@@ -17,7 +17,7 @@ def registro_usuario(request):
         #mensaje = respuesta.json()['mensaje']
         #return JsonResponse({'mensaje': mensaje})
         #if mensaje == '1':
-         #   return render(request, 'registro_exitoso.html')
+        return render(request, 'registro_exitoso.html')
         #else:
          #   return render(request, 'registro_fallido.html')
     else:
