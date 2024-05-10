@@ -1,8 +1,10 @@
 from ..models import User
+from django.db import connection
 
 def get_users():
-    users = User.objects.raw("SELECT * FROM User")
-    return users
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT * FROM User")
+        return cursor.fetchall()
 
 # def get_users():
 #     users = User.objects.all()
