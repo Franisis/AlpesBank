@@ -2,8 +2,7 @@ from ..models import User
 
 def get_users():
     users = User.objects.raw("SELECT * FROM User")
-    user = next(iter(users), None)
-    return user
+    return users
 
 # def get_users():
 #     users = User.objects.all()
