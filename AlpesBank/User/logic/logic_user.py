@@ -1,8 +1,13 @@
 from ..models import User
 
 def get_users():
-    users = User.objects.all()
-    return users
+    users = User.objects.raw("SELECT * FROM User")
+    user = next(iter(users), None)
+    return user
+
+# def get_users():
+#     users = User.objects.all()
+#     return users
 
 def create_user(form):
     user = form.save()
