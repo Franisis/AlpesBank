@@ -10,7 +10,7 @@ def create_user(form):
     return ()
 
 def get_by_id(user_pk):
-    users = User.objects.raw("SELECT * FROM User WHERE cedula = %s", [user_pk])
+    users = User.objects.raw("SELECT * FROM User_user WHERE cedula = %s", [user_pk])
     user = next(iter(users), None)
     return user
 
