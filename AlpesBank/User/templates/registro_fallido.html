@@ -30,8 +30,22 @@
 </head>
 <body>
     <div class="container">
-        <h1>Su usuario ya se encuentra registrado en el banco</h1>
+        <h1>Registro de Usuario</h1>
         <img src="https://senecode.virtual.uniandes.edu.co/image/Seneca_singotto.png" alt="Logo del Banco" width="200">
+        {% if form.errors %}
+            <div class="error">
+                <strong>Errores en el formulario:</strong>
+                {{ form.non_field_errors }}
+                {% for field in form %}
+                    {{ field.errors }}
+                {% endfor %}
+            </div>
+        {% endif %}
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Registrar Usuario</button>
+        </form>
     </div>
 </body>
 </html>
