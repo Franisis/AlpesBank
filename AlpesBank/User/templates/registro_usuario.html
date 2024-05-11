@@ -20,10 +20,19 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+        .field {
+            margin-bottom: 20px;
+        }
+        label, input, span.error {
+            display: block;
+            margin-top: 5px;
+        }
+        span.error {
+            color: red;
+        }
         input[type="text"], input[type="email"], input[type="password"] {
             width: 100%;
             padding: 10px;
-            margin: 8px 0;
             box-sizing: border-box;
             border: 1px solid #ccc;
             border-radius: 4px;
@@ -45,26 +54,20 @@
 
     <h1>Registro de Usuario - AlpesBank</h1>
 
-    <form action="userCreate" method="post">
+    <form action="{% url 'userPost' %}" method="post">
         {% csrf_token %}
-        <label for="nombre">Nombre:</label><br>
-        <input type="text" id="nombre" name="nombre" required><br>
-
-        <label for="apellido">Apellido:</label><br>
-        <input type="text" id="apellido" name="apellido" required><br>
-
-        <label for="email">Correo electrónico:</label><br>
-        <input type="email" id="email" name="email" required><br>
-
-        <label for="telefono">Teléfono:</label><br>
-        <input type="text" id="telefono" name="telefono" required><br>
-
-        <label for="direccion">Cedula:</label><br>
-        <input type="text" id="cedula" name="cedula" required><br>
-        <!--
-        <label for="password">Contraseña:</label><br>
-        <input type="password" id="password" name="password" required><br>
-            -->
+        {% for field in form %}
+            <div class="field">
+                {{ field.label_tag }}<br>
+                {{ field }}
+                {% if field.help_text %}
+                <small style="color: grey;">{{ field.help_text }}</small>
+                {% endif %}
+                {% for error in field.errors %}
+                <span class="error">{{ error }}</span>
+                {% endfor %}
+            </div>
+        {% endfor %}
         <input type="submit" value="Registrar">
     </form>
 

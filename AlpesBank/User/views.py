@@ -32,7 +32,7 @@ def userPost(request):
             #respuesta = requests.get('http://35.188.169.4:8080/usercrm/')
         else:
             # Si el formulario no es válido, renderizar la página con el formulario y los errores
-            return render(request, 'registro_fallido.html', {'form': form})
+            return render(request, 'registro_usuario.html', {'form': form})
             
         
 
