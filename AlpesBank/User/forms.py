@@ -1,17 +1,23 @@
 from django import forms
+from django.core.validators import EmailValidator, RegexValidator, MaxLengthValidator, MinLengthValidator
 from .models import User
-from django.core.validators import EmailValidator, RegexValidator, MaxLengthValidator
 
 class UserForm(forms.ModelForm):
     name = forms.CharField(
         max_length=100, 
-        validators=[MaxLengthValidator(100)],
-        error_messages={'max_length': 'El nombre debe tener máximo 100 caracteres.'}
+        validators=[MinLengthValidator(1), MaxLengthValidator(100)],
+        error_messages={
+            'max_length': 'El nombre debe tener máximo 100 caracteres.',
+            'min_length': 'El nombre es un campo obligatorio.'
+        }
     )
     lastName = forms.CharField(
         max_length=100, 
-        validators=[MaxLengthValidator(100)],
-        error_messages={'max_length': 'El apellido debe tener máximo 100 caracteres.'}
+        validators=[MinLengthValidator(1), MaxLengthValidator(100)],
+        error_messages={
+            'max_length': 'El apellido debe tener máximo 100 caracteres.',
+            'min_length': 'El apellido es un campo obligatorio.'
+        }
     )
     correo = forms.EmailField(
         validators=[EmailValidator()],
@@ -27,8 +33,8 @@ class UserForm(forms.ModelForm):
         error_messages={'invalid': 'Por favor ingresa un número de teléfono válido de Colombia.'}
     )
     cedula = forms.CharField(
-        validators=[RegexValidator(regex=r'^\d+$', message="La cédula solo debe contener números.")],
-        error_messages={'invalid': 'La cédula solo debe contener números.'}
+        validators=[RegexValidator(regex=r'^\d{5,10}$', message="La cédula debe tener entre 5 y 10 dígitos.")],
+        error_messages={'invalid': 'La cédula solo debe contener números y tener entre 5 y 10 dígitos.'}
     )
 
     class Meta:
