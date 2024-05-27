@@ -171,7 +171,7 @@ resources:
 
 
 # Service instances
-- name: CRM-ms
+- name: crm-ms
   type: compute.v1.instance
   properties:
     zone: us-central1-a
