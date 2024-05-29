@@ -6,8 +6,9 @@ from bson.objectid import ObjectId
 def get_users():
     client = MongoClient("mongodb://monitoring_user:isis2503@10.128.0.70:27017")
     db = client.monitoring_db
-    db = db.find({})
-    users = [ User.from_mongo(user) for user in db ]
+    users_collection = db['users']
+    cursor = users_collection.find({})
+    users = [ User.from_mongo(user) for user in cursor ]
     client.close()
 
     return users
