@@ -47,6 +47,9 @@
 
     <form action="{% url 'registro_usuario' %}" method="post">
         {% csrf_token %}
+        <label for="id">Id:</label><br>
+        <input type="text" id="id" name="id" required><br>
+
         <label for="nombre">Nombre:</label><br>
         <input type="text" id="nombre" name="name" required><br>
 
