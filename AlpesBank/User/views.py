@@ -4,7 +4,7 @@ from django.core import serializers
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from django.contrib import messages
-from .forms import UserForm
+#from .forms import UserForm
 
 #import requests
 from django.shortcuts import render
@@ -16,14 +16,17 @@ from bson.objectid import ObjectId
 from pymongo import MongoClient
 from rest_framework.decorators import api_view, renderer_classes
 from rest_framework.parsers import JSONParser
+from .models import User, UserSerializer
+
 # Create your views here.
+
 
 @api_view(['GET', 'POST'])
 def user(request):
     if request.method == "GET":
-        users = ul.get_users()
-        user_dicts = [user.__dict__ for user in users]  # Convert each user object to a dictionary
-        return JsonResponse(user_dicts, safe=False) 
+        users = User.objects.all()  # Assuming ul.get_users() fetches all User objects
+        serializer = UserSerializer(users, many=True)
+        return JsonResponse(serializer.data, safe=False)
     if request.method == "POST":
         try:
             data = JSONParser().parse(request)

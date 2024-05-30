@@ -2,6 +2,8 @@ from ..models import User
 from django.db import connection
 from pymongo import MongoClient
 from bson.objectid import ObjectId
+import requests
+
 
 def get_users():
     client = MongoClient("mongodb://monitoring_user:isis2503@10.128.0.70:27017")
@@ -41,7 +43,7 @@ def createUser(data):
 
     # Verify variable data
     user = verifyUserData(data)
-
+    
     # Create variable in MongoDB
     client = MongoClient("mongodb://monitoring_user:isis2503@10.128.0.70:27017")
     db = client.monitoring_db
