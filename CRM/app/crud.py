@@ -3,6 +3,7 @@ from .models import User
 from .schemas import UserCreate, UserUpdate
 from .database import SessionLocal
 
+
 def get_user_by_cedula(cedula: str):
     db = SessionLocal()
     return db.query(User).filter(User.cedula == cedula).first()

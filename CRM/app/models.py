@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, DateTime
 from .database import Base
 
+
 class User(Base):
     __tablename__ = "users"
 
@@ -10,4 +11,4 @@ class User(Base):
     cedula = Column(String, unique=True, index=True, nullable=False)
     correo = Column(String, unique=True, index=True, nullable=False)
     telefono = Column(String, index=True)
-    
+    last_login = Column(DateTime, index=True)
