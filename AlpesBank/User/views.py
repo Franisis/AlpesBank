@@ -55,14 +55,14 @@ def user_detail(request, pk):
         user_dto = ul.get_by_cedula(pk)
         
         # Aquí puedes hacer lo que quieras con el objeto de usuario
-        user_data = {
-            'name': user.name,
-            'lastName': user.lastName,
-            'cedula': user.cedula,
-            'correo': user.correo,
-            'telefono': user.telefono,
-            #'document': user.document
-        }
+        # user_data = {
+        #     'name': user.name,
+        #     'lastName': user.lastName,
+        #     'cedula': user.cedula,
+        #     'correo': user.correo,
+        #     'telefono': user.telefono,
+        #     #'document': user.document
+        # }
 
         # Devuelve los datos del usuario como una respuesta JSON
         return JsonResponse(user_dto.to_dict())
