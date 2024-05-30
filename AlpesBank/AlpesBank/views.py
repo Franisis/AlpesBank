@@ -11,11 +11,11 @@ import requests
 def index(request):
     return render(request, 'index.html')
 
-"""def registro_usuario(request):
+def registro_usuario(request):
     if request.method == 'POST':
-        nombre = request.POST.get('nombre')
-        respuesta = requests.get('http://35.188.169.4:8080/usercrm/')
-        mensaje = respuesta.json()['mensaje']
+        respuesta = requests.post('http://35.188.169.4:8080/user/')
+        print(respuesta.json())
+        mensaje = respuesta.json()['msg']
         
         if mensaje == '1':
             logic.createUser(request.POST)
@@ -25,22 +25,22 @@ def index(request):
     else:
         return render(request, 'registro_usuario.html')
 
-"""
-def check_user_in_crm(nombre, apellido, cedula, correo, telefono, last_login):
-    url = "http://35.188.169.4:8080/user/"
-    payload = {
-        "nombre": nombre,
-        "apellido": apellido,
-        "cedula": cedula,
-        "correo": correo,
-        "telefono": telefono
-    }
-    response = requests.post(url, json=payload)
-    if response == '1':
-            logic.createUser(response.POST)
-            return render(response, 'registro_exitoso.html')
-    else:
-            return render(response, 'registro_fallido.html')
+
+# def registro_usuario(nombre, apellido, cedula, correo, telefono):
+#     url = "http://35.188.169.4:8080/user/"
+#     payload = {
+#         "nombre": nombre,
+#         "apellido": apellido,
+#         "cedula": cedula,
+#         "correo": correo,
+#         "telefono": telefono
+#     }
+#     response = requests.post(url, json=payload)
+#     if response == '1':
+#             logic.createUser(response.POST)
+#             return render(response, 'registro_exitoso.html')
+#     else:
+#             return render(response, 'registro_fallido.html')
     #return response.json()
 
 
