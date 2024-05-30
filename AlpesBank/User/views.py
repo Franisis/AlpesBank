@@ -18,13 +18,14 @@ from rest_framework.decorators import api_view, renderer_classes
 from rest_framework.parsers import JSONParser
 # Create your views here.
 
-@login_required
-@api_view(["GET", "POST"])
-def user(request):
+
+@api_view(["GET"])
+def userGet(request):
     if request.method == "GET":
         users = ul.get_users()
         return JsonResponse([user.__dict__ for user in users])
-
+@api_view(["POST"])
+def userPost(request):
     if request.method == "POST":
         try:
             data = JSONParser().parse(request)
