@@ -6,12 +6,12 @@ from User.forms import UserForm
 from User import views
 from User.logic import logic_user as logic
 from rest_framework.parsers import JSONParser
-
+import requests
 
 def index(request):
     return render(request, 'index.html')
 
-def registro_usuario(request):
+"""def registro_usuario(request):
     if request.method == 'POST':
         #nombre = request.POST.get('nombre')
         #respuesta = requests.get('http://35.188.169.4:8080/usercrm/')
@@ -23,7 +23,22 @@ def registro_usuario(request):
         #else:
          #   return render(request, 'registro_fallido.html')
     else:
-        return render(request, 'registro_usuario.html')
+        return render(request, 'registro_usuario.html')"""
+
+
+def check_user_in_crm(nombre, apellido, cedula, correo, telefono, last_login):
+    url = "http://<IP-VM>:8000/user/"
+    payload = {
+        "nombre": nombre,
+        "apellido": apellido,
+        "cedula": cedula,
+        "correo": correo,
+        "telefono": telefono,
+        "last_login": last_login
+    }
+    response = requests.post(url, json=payload)
+    return response.json()
+
 
 def formulario_cliente(request):
     if request.method == 'POST':

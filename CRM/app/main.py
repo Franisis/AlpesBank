@@ -36,3 +36,13 @@ async def create_user(user: UserCreate):
     else:
         create_or_update_user(user)
         return {"msg": "User created"}
+
+
+
+
+import asyncio
+
+# Resto de tu código
+
+if __name__ == "__main__":
+    asyncio.get_event_loop().run_until_complete(app.main())
