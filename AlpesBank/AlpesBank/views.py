@@ -19,24 +19,7 @@ def registro_usuario(request):
         #return JsonResponse({'mensaje': mensaje})
         #if mensaje == '1':
         logic.createUser(request.POST)
-
-        # print(request)
-        # print(request.data)
-        # try:
-        #     data = JSONParser().parse(request)
-        #     print(data)
-        #     user = logic.createUser(data)
-        #     print(user)
-        #     response = {
-        #         "objectId": str(user.id),
-        #         "message": f"User {user.name} created in DB"
-        #     }
-        #     print(response)
         return render(request, 'registro_exitoso.html')
-        # except ValueError as e:
-        #     print(request)
-
-            # return JsonResponse({"error":str(e)}, status=400)
         #else:
          #   return render(request, 'registro_fallido.html')
     else:
