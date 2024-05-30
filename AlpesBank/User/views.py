@@ -24,7 +24,7 @@ from .models import User, UserSerializer
 @api_view(['GET', 'POST'])
 def user(request):
     if request.method == "GET":
-        users = User.objects.all()  # Assuming ul.get_users() fetches all User objects
+        users = ul.get_users() 
         serializer = UserSerializer(users, many=True)
         return JsonResponse(serializer.data, safe=False)
     if request.method == "POST":
