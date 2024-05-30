@@ -31,11 +31,14 @@ def userPost(request):
     if request.method == "POST":
         try:
             data = JSONParser().parse(request)
+            print(data)
             user = ul.createUser(data)
+            print(user)
             response = {
                 "objectId": str(user.id),
                 "message": f"User {user.name} created in DB"
             }
+            print(response)
             return JsonResponse(response, safe=False)
         except ValueError as e:
             print(request)
