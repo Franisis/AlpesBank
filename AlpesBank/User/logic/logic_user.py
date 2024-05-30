@@ -2,7 +2,7 @@ from ..models import User
 from django.db import connection
 from pymongo import MongoClient
 from bson.objectid import ObjectId
-import requests
+
 
 
 def get_users():
