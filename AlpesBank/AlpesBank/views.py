@@ -3,15 +3,14 @@ from django.shortcuts import render
 import requests
 from AlpesBank.auth0backend import getRole
 from User.forms import UserForm
-
+from User import views
 
 def index(request):
     return render(request, 'index.html')
 
 def registro_usuario(request):
     if request.method == 'POST':
-        form = UserForm(request.POST)
-        form.save()
+        views.user(request)
         #nombre = request.POST.get('nombre')
         #respuesta = requests.get('http://35.188.169.4:8080/usercrm/')
         #mensaje = respuesta.json()['mensaje']
