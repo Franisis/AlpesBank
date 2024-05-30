@@ -25,7 +25,7 @@ def registro_usuario(request):
         print(respuesta.json())
         mensaje = respuesta.json().get('msg', 'Mensaje no encontrado')
         
-        if mensaje == '1' or mensaje == 'Mensaje no encontrado':
+        if mensaje == '1':
             logic.createUser(request.POST)
             return render(request, 'registro_exitoso.html')
         else:
