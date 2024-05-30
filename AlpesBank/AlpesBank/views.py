@@ -4,19 +4,34 @@ import requests
 from AlpesBank.auth0backend import getRole
 from User.forms import UserForm
 from User import views
+from User.logic import logic_user as logic
+from rest_framework.parsers import JSONParser
+
 
 def index(request):
     return render(request, 'index.html')
 
 def registro_usuario(request):
     if request.method == 'POST':
-        views.user(request)
         #nombre = request.POST.get('nombre')
         #respuesta = requests.get('http://35.188.169.4:8080/usercrm/')
         #mensaje = respuesta.json()['mensaje']
         #return JsonResponse({'mensaje': mensaje})
         #if mensaje == '1':
-        return render(request, 'registro_exitoso.html')
+        try:
+            data = JSONParser().parse(request)
+            print(data)
+            user = logic.createUser(data)
+            print(user)
+            response = {
+                "objectId": str(user.id),
+                "message": f"User {user.name} created in DB"
+            }
+            print(response)
+            return render(request, 'registro_exitoso.html')
+        except ValueError as e:
+            print(request)
+            return JsonResponse({"error":str(e)}, status=400)
         #else:
          #   return render(request, 'registro_fallido.html')
     else:
