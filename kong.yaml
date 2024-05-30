@@ -22,10 +22,10 @@ services:
 upstreams:
   - name: documents_upstream
     targets:
-      - target: 10.128.0.85:8080
+      - target: 10.128.0.2:8080
         weight: 100
 
   - name: crm_upstream
     targets:
-      - target: 10.128.0.84:8080
+      - target: 10.128.0.4:8080
         weight: 100
