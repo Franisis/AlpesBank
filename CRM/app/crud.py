@@ -16,7 +16,7 @@ def create_or_update_user(user: UserCreate):
         db_user.apellido = user.apellido
         db_user.correo = user.correo
         db_user.telefono = user.telefono
-        db_user.last_login = user.last_login
+ 
     else:
         db_user = User(
             nombre=user.nombre,

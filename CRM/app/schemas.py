@@ -9,7 +9,7 @@ class UserBase(BaseModel):
     cedula: str
     correo: str
     telefono: Optional[str] = None
-    last_login: Optional[datetime] = None
+
 
 class UserCreate(UserBase):
     pass

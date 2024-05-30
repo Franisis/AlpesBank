@@ -28,8 +28,7 @@ async def create_user(user: UserCreate):
             apellido=user.apellido,
             cedula=user.cedula,
             correo=user.correo,
-            telefono=user.telefono,
-            last_login=user.last_login
+            telefono=user.telefono
         )
         create_or_update_user(update_user)
         return {"msg": "User updated"}
