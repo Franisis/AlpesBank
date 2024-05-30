@@ -32,7 +32,7 @@ def registro_usuario(request):
         #         "message": f"User {user.name} created in DB"
         #     }
         #     print(response)
-        #     return render(request, 'registro_exitoso.html')
+        return render(request, 'registro_exitoso.html')
         # except ValueError as e:
         #     print(request)
 
