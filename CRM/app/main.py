@@ -1,7 +1,8 @@
 from fastapi import FastAPI, HTTPException
 from schemas import UserCreate, UserUpdate
 
-from .crud import get_user_by_cedula, create_or_update_user
+from crud import get_user_by_cedula, create_or_update_user
+
 
 app = FastAPI()
 
