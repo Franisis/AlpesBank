@@ -13,7 +13,8 @@ def index(request):
 
 def registro_usuario(request):
     if request.method == 'POST':
-        respuesta = requests.get('http://35.188.169.4:8080/user/')
+        respuesta = requests.post('http://35.188.169.4:8080/user/')
+        print(respuesta.json())
         mensaje = respuesta.json()['msg']
         
         if mensaje == '1':
