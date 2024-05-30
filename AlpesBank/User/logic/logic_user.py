@@ -15,11 +15,11 @@ def get_users():
 
     return users
 
-def get_by_id(id):
+def get_by_cedula(id):
     client = MongoClient("mongodb://monitoring_user:isis2503@10.128.0.70:27017")
     db = client.monitoring_db
-    variables_collection = db['users']
-    user = variables_collection.find_one({'id': id})
+    variables_collection = db['variables']
+    user = variables_collection.find_one({'cedula': id})
     client.close()
 
     if user is None:

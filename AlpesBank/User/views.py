@@ -47,11 +47,12 @@ def user(request):
     
    
 @login_required
+@api_view(['GET'])
 def user_detail(request, pk):
     role = getRole(request)
     if role == "asesor":
         # Intenta obtener el usuario por su clave primaria (id)
-        user = ul.get_by_id(pk)
+        user_dto = ul.get_by_cedula(pk)
         
         # Aquí puedes hacer lo que quieras con el objeto de usuario
         user_data = {
@@ -64,7 +65,7 @@ def user_detail(request, pk):
         }
 
         # Devuelve los datos del usuario como una respuesta JSON
-        return render(request, 'user.html', {'user': user})
+        return JsonResponse(user_dto.to_dict())
     else:
         return render(request, 'acceso_denegado.html')
     

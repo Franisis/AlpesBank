@@ -9,7 +9,7 @@ from . import views
 urlpatterns =[
     url('^users/$', views.user),
     #url(r'^userCreate/', views.userPost , name = 'userPost'),
-    path('user/<int:pk>/', views.user_detail, name='user-detail'),
+    path('user/<str:pk>/', views.user_detail, name='user-detail'),
     path(r'', include('django.contrib.auth.urls')),
     path(r'', include('social_django.urls')),
 ]
