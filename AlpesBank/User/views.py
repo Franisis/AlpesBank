@@ -25,6 +25,7 @@ from .models import User, UserSerializer
 def user(request):
     if request.method == "GET":
         users = ul.get_users() 
+        user = serializers(users)
         return JsonResponse(users, safe=False)
     if request.method == "POST":
         try:
