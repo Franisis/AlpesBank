@@ -74,7 +74,36 @@ resources:
 #     - IPProtocol: TCP
 #       ports: 
 #       - 5432
-- name: nosqld-firewall-django
+# - name: nosqld-firewall-django
+#   type: compute.v1.firewall
+#   properties:
+#     network: https://www.googleapis.com/compute/v1/projects/sprints-417218/global/networks/default
+#     priority: 1000
+#     direction: INGRESS
+#     sourceRanges: 
+#     - 0.0.0.0/0
+#     targetTags:
+#     - nosqld-django
+#     allowed:
+#     - IPProtocol: TCP
+#       ports: 
+#       - 8080
+# - name: nosqld-firewall-mongo
+#   type: compute.v1.firewall
+#   properties:
+#     network: https://www.googleapis.com/compute/v1/projects/sprints-417218/global/networks/default
+#     priority: 1000
+#     direction: INGRESS
+#     sourceTags: 
+#     - nosqld-django
+#     targetTags:
+#     - nosqld-mongo
+#     allowed:
+#     - IPProtocol: TCP
+#       ports: 
+#       - 27017
+
+- name: msd-api-gateway
   type: compute.v1.firewall
   properties:
     network: https://www.googleapis.com/compute/v1/projects/sprints-417218/global/networks/default
@@ -83,25 +112,47 @@ resources:
     sourceRanges: 
     - 0.0.0.0/0
     targetTags:
-    - nosqld-django
+    - msd-api-gateway
     allowed:
     - IPProtocol: TCP
       ports: 
-      - 8080
-- name: nosqld-firewall-mongo
-  type: compute.v1.firewall
+      - 8000
+# Kong instance
+- name: msd-kong-instance
+  type: compute.v1.instance
   properties:
-    network: https://www.googleapis.com/compute/v1/projects/sprints-417218/global/networks/default
-    priority: 1000
-    direction: INGRESS
-    sourceTags: 
-    - nosqld-django
-    targetTags:
-    - nosqld-mongo
-    allowed:
-    - IPProtocol: TCP
-      ports: 
-      - 27017
+    zone: us-central1-a
+    machineType: https://www.googleapis.com/compute/v1/projects/sprints-417218/zones/us-central1-a/machineTypes/e2-micro
+    disks:
+    - deviceName: boot
+      type: PERSISTENT
+      boot: true
+      autoDelete: true
+      initializeParams:
+        sourceImage: https://www.googleapis.com/compute/v1/projects/cos-cloud/global/images/cos-101-17162-463-8
+    networkInterfaces:
+    - network: https://www.googleapis.com/compute/v1/projects/sprints-417218/global/networks/default
+      networkIP: 10.128.0.81
+      accessConfigs:
+      - name: External NAT
+        type: ONE_TO_ONE_NAT
+    tags:
+      items: 
+      - msd-api-gateway
+    metadata:
+      items:
+      - key: startup-script
+        value: |
+          #!/bin/bash
+          sudo mkdir /home/labs
+          cd /home/labs
+          sudo git clone https://github.com/Franisis/AlpesBank.git
+          cd ISIS2503-Microservices-AppDjango
+          docker network create kong-net
+          docker run -d --name kong --network=kong-net --restart=always \
+          -v "$(pwd):/kong/declarative/" -e "KONG_DATABASE=off" \
+          -e "KONG_DECLARATIVE_CONFIG=/kong/declarative/kong.yaml" \
+          -p 8000:8000 kong/kong-gateway
 
 # Kong instance
 
@@ -170,27 +221,27 @@ resources:
 #           #!/bin/bash
 #           docker run --restart=always -d -e POSTGRES_USER=variables_user -e POSTGRES_DB=variables_db -e POSTGRES_PASSWORD=isis2503 -p 5432:5432 --name variables-db postgres
 
-- type: compute.v1.instance
-  name: nosqld-mongo-instance
-  properties:
-    zone: us-central1-a
-    machineType: https://www.googleapis.com/compute/v1/projects/sprints-417218/zones/us-central1-a/machineTypes/e2-micro
-    disks:
-    - deviceName: boot
-      type: PERSISTENT
-      boot: true
-      autoDelete: true
-      initializeParams:
-        sourceImage: https://www.googleapis.com/compute/v1/projects/cos-cloud/global/images/cos-101-17162-386-64
-    networkInterfaces:
-    - network: https://www.googleapis.com/compute/v1/projects/sprints-417218/global/networks/default
-      networkIP: 10.128.0.70
-      accessConfigs:
-      - name: External NAT
-        type: ONE_TO_ONE_NAT
-    tags:
-      items: 
-      - nosqld-mongo
+# - type: compute.v1.instance
+#   name: nosqld-mongo-instance
+#   properties:
+#     zone: us-central1-a
+#     machineType: https://www.googleapis.com/compute/v1/projects/sprints-417218/zones/us-central1-a/machineTypes/e2-micro
+#     disks:
+#     - deviceName: boot
+#       type: PERSISTENT
+#       boot: true
+#       autoDelete: true
+#       initializeParams:
+#         sourceImage: https://www.googleapis.com/compute/v1/projects/cos-cloud/global/images/cos-101-17162-386-64
+#     networkInterfaces:
+#     - network: https://www.googleapis.com/compute/v1/projects/sprints-417218/global/networks/default
+#       networkIP: 10.128.0.70
+#       accessConfigs:
+#       - name: External NAT
+#         type: ONE_TO_ONE_NAT
+#     tags:
+#       items: 
+#       - nosqld-mongo
 
 #- name: msd-measurements-db
 #  type: compute.v1.instance
