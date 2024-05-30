@@ -27,6 +27,7 @@ def userGet(request):
 
 @api_view(["POST"])
 def userPost(request):
+    print(request)
     if request.method == "POST":
         try:
             data = JSONParser().parse(request)
