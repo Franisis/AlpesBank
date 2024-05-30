@@ -25,7 +25,8 @@ from .models import User
 def user(request):
     if request.method == "GET":
         users= ul.get_users() 
-        return HttpResponse(users)
+        users_list = [user.to_dict() for user in users]
+        return JsonResponse(users_list, safe=False)
     if request.method == "POST":
         try:
             data = JSONParser().parse(request)

@@ -18,15 +18,17 @@ class User(models.Model):
         user.id = str(dto['_id'])
         user.name = dto['name']
         user.lastname = dto['lastname']
-        user.telefono=dto['telefono']
+        user.telefono = dto['telefono']
         user.cedula = dto['cedula']
         user.correo = dto['correo']
         return user
 
-    
-    def toJSON(self):
-        return json.dumps(
-            self,
-            default=lambda o: o.__dict__,
-            sort_keys=True,
-            indent=4)
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "correo": self.correo,
+            "name": self.name,
+            "lastname": self.lastname,
+            "cedula": self.cedula,
+            "telefono": self.telefono
+        }
