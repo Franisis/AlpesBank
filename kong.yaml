@@ -7,7 +7,7 @@ services:
     routes:
       - name: documents
         paths:
-          - /bank
+          - /
         strip_path: false
 
   - name: crm_service
