@@ -4,6 +4,13 @@ from .crud import get_user_by_cedula, create_or_update_user
 
 app = FastAPI()
 
+
+@app.get("/")
+def home():
+    return{"message":"hello worls"}
+
+
+
 @app.post("/user/")
 async def create_user(user: UserCreate):
     db_user = get_user_by_cedula(user.cedula)
