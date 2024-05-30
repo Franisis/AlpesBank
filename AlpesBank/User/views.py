@@ -16,7 +16,7 @@ from bson.objectid import ObjectId
 from pymongo import MongoClient
 from rest_framework.decorators import api_view, renderer_classes
 from rest_framework.parsers import JSONParser
-from .models import User, UserSerializer
+from .models import User
 
 # Create your views here.
 
