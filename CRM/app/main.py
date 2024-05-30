@@ -37,7 +37,7 @@ async def create_user(user: UserCreate):
         return {"msg": "1"}"""
 
 
-@app.post("/user/")
+@app.get("/user/")
 async def create_user(user: UserCreate):
     
     return {"msg": "1"}
