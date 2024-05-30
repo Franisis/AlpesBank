@@ -24,6 +24,7 @@ def userGet(request):
         users = ul.get_users()
         user_dicts = [user.__dict__ for user in users]  # Convert each user object to a dictionary
         return JsonResponse(user_dicts, safe=False) 
+
 @api_view(["POST"])
 def userPost(request):
     if request.method == "POST":
@@ -36,6 +37,7 @@ def userPost(request):
             }
             return JsonResponse(response, safe=False)
         except ValueError as e:
+            print(request)
             return JsonResponse({"error":str(e)}, status=400)
     
    
