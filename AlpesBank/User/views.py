@@ -6,40 +6,42 @@ from django.urls import reverse
 from django.contrib import messages
 from .forms import UserForm
 
-import requests
+#import requests
 from django.shortcuts import render
 from django.http import JsonResponse
 from AlpesBank.auth0backend import getRole
 from django.contrib.auth.decorators import login_required
+#Sprint 4
+from bson.objectid import ObjectId
+from pymongo import MongoClient
+from rest_framework.decorators import api_view, renderer_classes
+from rest_framework.parsers import JSONParser
 # Create your views here.
 
-
-def userGet(request):
-    if request.method=="GET":
+@api_view(['GET', 'POST'])
+def user(request):
+    if request.method == "GET":
         users = ul.get_users()
-        users_dto = serializers.serialize('json', users)
-        return HttpResponse(users_dto, 'application/json')
+        user_dicts = [user.__dict__ for user in users]  # Convert each user object to a dictionary
+        return JsonResponse(user_dicts, safe=False) 
+    if request.method == "POST":
+        try:
+            data = JSONParser().parse(request)
+            print(data)
+            user = ul.createUser(data)
+            print(user)
+            response = {
+                "objectId": str(user.id),
+                "message": f"User {user.name} created in DB"
+            }
+            print(response)
+            return JsonResponse(response, safe=False)
+        except ValueError as e:
+            print(request)
+            return JsonResponse({"error":str(e)}, status=400)
 
-def userPost(request):
-    if request.method == 'POST':
-        form = UserForm(request.POST)
-        if form.is_valid():
-            
-            form.save()  # Guardar el usuario en la base de datos
-            messages.add_message(request, messages.SUCCESS, 'Successfully created User')
-            return HttpResponseRedirect(reverse('userPost'))
-            #Redirigir a otra página después del registro
-            #respuesta = requests.get('http://35.188.169.4:8080/usercrm/')
-        else:
-            # Si el formulario no es válido, renderizar la página con el formulario y los errores
-            return render(request, 'registro_usuario.html', {'form': form})
-            
-        
-
-    else:
-        # Renderizar el formulario vacío para una solicitud GET
-        form = UserForm()
-        return render(request, 'registro_usuario.html', {'form': form})
+    
+    
    
 @login_required
 def user_detail(request, pk):

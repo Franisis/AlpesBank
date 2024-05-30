@@ -1,0 +1,31 @@
+_format_version: "2.1"
+
+services:
+  - name: documents_service
+    host: documents_upstream
+    protocol: http
+    routes:
+      - name: documents
+        paths:
+          - /users
+        strip_path: false
+
+  - name: crm_service
+    host: crm_upstream
+    protocol: http
+    routes:
+      - name: crm
+        paths:
+          - /crm
+        strip_path: false
+    
+upstreams:
+  - name: documents_upstream
+    targets:
+      - target: 10.128.0.85:8080
+        weight: 100
+
+  - name: crm_upstream
+    targets:
+      - target: 10.128.0.84:8080
+        weight: 100
