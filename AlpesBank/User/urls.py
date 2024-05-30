@@ -8,7 +8,7 @@ from . import views
 
 urlpatterns =[
     path('users/', views.userGet, name = 'userGet'),
-    path(r'^userCreate/$', views.userPost , name = 'userPost'),
+    path(r'userCreate/', views.userPost , name = 'userPost'),
     path('user/<int:pk>/', views.user_detail, name='user-detail'),
     path(r'', include('django.contrib.auth.urls')),
     path(r'', include('social_django.urls')),
