@@ -1,5 +1,5 @@
 fastapi
 uvicorn
-sqlalchemy==1.4.32
-psycopg2-binary==2.9.3
-pydantic==1.9.0
+sqlalchemy
+psycopg2-binary
+pydantic
