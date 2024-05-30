@@ -18,6 +18,7 @@ def registro_usuario(request):
         #mensaje = respuesta.json()['mensaje']
         #return JsonResponse({'mensaje': mensaje})
         #if mensaje == '1':
+        print(request)
         try:
             data = JSONParser().parse(request)
             print(data)
