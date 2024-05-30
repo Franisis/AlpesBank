@@ -26,7 +26,7 @@ def index(request):
         return render(request, 'registro_usuario.html')
 
 """
-def check_user_in_crm(nombre, apellido, cedula, correo, telefono, last_login):
+def registro_usuario(nombre, apellido, cedula, correo, telefono):
     url = "http://35.188.169.4:8080/user/"
     payload = {
         "nombre": nombre,
