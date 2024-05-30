@@ -43,19 +43,19 @@ def createUser(data):
 
     # Verify variable data
     user = verifyUserData(data)
-    
+
     # Create variable in MongoDB
     client = MongoClient("mongodb://monitoring_user:isis2503@10.128.0.70:27017")
     db = client.monitoring_db
     variables_collection = db['variables']
     user.id = variables_collection.insert(
         {
-            'id': user.id,
+            'id': str(user.id),
             'correo': user.correo,
             'name': user.name,
             'lastname': user.lastname,
-            'cedula': user.cedula,
-            'telefono': user.telefono
+            'cedula': str(user.cedula),
+            'telefono': str(user.telefono)
         }
     )
     client.close()
