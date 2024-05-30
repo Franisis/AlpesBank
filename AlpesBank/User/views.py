@@ -19,11 +19,11 @@ from rest_framework.parsers import JSONParser
 # Create your views here.
 
 
-@api_view(["GET"])
 def userGet(request):
     if request.method == "GET":
         users = ul.get_users()
-        return JsonResponse([user.__dict__ for user in users])
+        user_dicts = [user.__dict__ for user in users]  # Convert each user object to a dictionary
+        return JsonResponse(user_dicts, safe=False) 
 @api_view(["POST"])
 def userPost(request):
     if request.method == "POST":
