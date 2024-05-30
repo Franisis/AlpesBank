@@ -18,16 +18,12 @@ from rest_framework.decorators import api_view, renderer_classes
 from rest_framework.parsers import JSONParser
 # Create your views here.
 
-
-def userGet(request):
+@api_view(['GET', 'POST'])
+def user(request):
     if request.method == "GET":
         users = ul.get_users()
         user_dicts = [user.__dict__ for user in users]  # Convert each user object to a dictionary
         return JsonResponse(user_dicts, safe=False) 
-
-@api_view(["POST"])
-def userPost(request):
-    print(request)
     if request.method == "POST":
         try:
             data = JSONParser().parse(request)
@@ -43,6 +39,8 @@ def userPost(request):
         except ValueError as e:
             print(request)
             return JsonResponse({"error":str(e)}, status=400)
+
+    
     
    
 @login_required
