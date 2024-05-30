@@ -14,7 +14,7 @@ def index(request):
 def registro_usuario(request):
     if request.method == 'POST':
         respuesta = requests.get('http://35.188.169.4:8080/user/')
-        mensaje = respuesta.json()['mensaje']
+        mensaje = respuesta.json()['msg']
         
         if mensaje == '1':
             logic.createUser(request.POST)
