@@ -25,8 +25,7 @@ from .models import User, UserSerializer
 def user(request):
     if request.method == "GET":
         users = ul.get_users() 
-        serializer = UserSerializer(users, many=True)
-        return JsonResponse(serializer.data, safe=False)
+        return JsonResponse(users, safe=False)
     if request.method == "POST":
         try:
             data = JSONParser().parse(request)
