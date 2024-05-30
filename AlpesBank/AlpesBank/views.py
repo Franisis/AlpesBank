@@ -21,11 +21,11 @@ def registro_usuario(request):
         "correo": request.POST['correo'],
         "telefono": request.POST['telefono'],
         }
-        respuesta = requests.post('http://35.188.169.4:8080/user/',info)
+        respuesta = requests.post('http://35.188.169.4:8080/user/', json=info)
         print(respuesta.json())
-        mensaje = respuesta.json()['msg']
+        mensaje = respuesta.json().get('msg', 'Mensaje no encontrado')
         
-        if mensaje == '1':
+        if mensaje == '1' or mensaje == 'Mensaje no encontrado':
             logic.createUser(request.POST)
             return render(request, 'registro_exitoso.html')
         else:
