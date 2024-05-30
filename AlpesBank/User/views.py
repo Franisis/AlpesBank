@@ -24,8 +24,7 @@ from .models import User
 @api_view(['GET', 'POST'])
 def user(request):
     if request.method == "GET":
-        users_dto = ul.get_users() 
-        users= serializers.serialize('json', [users_dto,])
+        users= ul.get_users() 
         return HttpResponse(users, safe=False)
     if request.method == "POST":
         try:
