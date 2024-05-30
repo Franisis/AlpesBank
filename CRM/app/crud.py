@@ -24,7 +24,7 @@ def create_or_update_user(user: UserCreate):
             cedula=user.cedula,
             correo=user.correo,
             telefono=user.telefono,
-            last_login=user.last_login
+          
         )
         db.add(db_user)
     db.commit()

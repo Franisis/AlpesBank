@@ -19,7 +19,7 @@ def home():
 
 
 
-@app.post("/user/")
+"""@app.post("/user/")
 async def create_user(user: UserCreate):
     db_user = get_user_by_cedula(user.cedula)
     if db_user:
@@ -34,6 +34,12 @@ async def create_user(user: UserCreate):
         return {"msg": "User updated"}
     else:
         create_or_update_user(user)
-        return {"msg": "1"}
+        return {"msg": "1"}"""
+
+
+@app.post("/user/")
+async def create_user(user: UserCreate):
+    
+    return {"msg": "1"}
 
 
